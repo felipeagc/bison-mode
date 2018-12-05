@@ -674,9 +674,10 @@ assumes indenting a new line, i.e. at column 0
                     (re-search-forward bison--word-constituent-re);; SIGERR
                     (let ((col (current-column)))
                       (cond ((> col (+ 1 bison-rule-enumeration-column))
-                             (forward-char -1)
-                             (just-no-space)
-                             (indent-to-column bison-rule-enumeration-column))
+                             ;; (forward-char -1)
+                             ;; (just-no-space)
+                             ;; (indent-to-column bison-rule-enumeration-column)
+                             )
                             ((< col (+ 1 bison-rule-enumeration-column))
                              (forward-char -1)
                              (indent-to-column
@@ -708,7 +709,7 @@ assumes indenting a new line, i.e. at column 0
 	        (funcall reset-pt))
 	       ((bison--within-production-body-p section)
 	        (back-to-indentation)
-	        (if (not (= (current-column) bison-rule-enumeration-column))
+	        (if (not (= (current-column) bison-rule-separator-column))
 	            (progn
 		            (just-no-space)
 		            (indent-to-column
@@ -729,7 +730,7 @@ assumes indenting a new line, i.e. at column 0
        ((= section bison--c-code-section)
 	      (c-indent-line))
        ))))
-  
+ 
 ;; *************** electric-functions ***************
 
 (defun bison-electric-colon (arg)
